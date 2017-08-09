@@ -33,13 +33,16 @@ public class Main extends Application {
 
         ProgressBar scoreBar = score.getScoreBar();
         scoreBar.setPrefWidth(300);
+        double scoreBarPrefWidth = scoreBar.getPrefWidth();
 
         TextField scoreField = score.getScoreField();
+        scoreField.setPrefWidth(scoreBarPrefWidth);
 
         TextField scorePercentField = score.getScorePercentField();
+        scorePercentField.setPrefWidth(scoreBarPrefWidth);
 
         Button challengeButton = new Button("Add score!");
-        challengeButton.setPrefWidth(scoreBar.getPrefWidth());
+        challengeButton.setPrefWidth(scoreBarPrefWidth);
 
         challengeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -50,10 +53,15 @@ public class Main extends Application {
 
         Scene scene = new Scene(grid, 350, 300);
         primaryStage.setScene(scene);
+
         grid.add(scoreBar, 0 ,0);
         grid.add(scoreField, 0,  1);
         grid.add(scorePercentField, 0 , 2);
         grid.add(challengeButton, 0 ,3);
+
+        scene.getStylesheets().add("style.css");
+        grid.getStyleClass().add("grid");
+        scorePercentField.getStyleClass().add("scorePercentField");
 
         primaryStage.show();
     }
