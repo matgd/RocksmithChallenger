@@ -1,9 +1,7 @@
 import javafx.geometry.Pos;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
-import sun.font.FontFamily;
 
 /**
  * Created by mateusz on 08.08.17.
