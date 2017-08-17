@@ -7,9 +7,9 @@ import javafx.scene.text.Font;
  * Created by mateusz on 08.08.17.
  */
 public class Score {
-    double currentScore;
-    double scoreLimit;
-    double progressPercent;
+    private double currentScore;
+    private double scoreLimit;
+    private double progressPercent;
 
     ProgressBar scoreBar;
     TextField scoreField;
