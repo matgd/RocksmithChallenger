@@ -1,13 +1,26 @@
 .grid {
-    -fx-background-color: lightskyblue;
-    -fx-font-size: 16px;
+    -fx-background-image: url("guitarbg.jpg");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-font-family: "Liberation Sans";
 }
 
+.scoreBar {
+    -fx-accent: green;
+}
+
+.scoreField {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
 .scorePercentField {
-    -fx-background-color: lightskyblue;
-    -fx-font-size: 28px;
+    -fx-background-color: rgba(255, 255, 255, 0);
+    -fx-font-size: 40px;
     -fx-font-weight: bolder;
     -fx-font-family: "Verdana";
+
+    -fx-effect: dropshadow(gaussian, white, 15, 0.3, 0, 0);
+    /* http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#typeeffect */
 }

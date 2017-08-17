@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -63,7 +64,7 @@ public class RocksmithChallenger extends Application {
     }
 
     private void applyPropertiesToComponents() {
-        double PREF_WIDTH = 300;
+        double PREF_WIDTH = 600;
         scoreBar.setPrefWidth(PREF_WIDTH);
         scoreField.setPrefWidth(PREF_WIDTH);
         scorePercentField.setPrefWidth(PREF_WIDTH);
@@ -71,10 +72,16 @@ public class RocksmithChallenger extends Application {
     }
 
     private Stage setUpStage(Stage primaryStage) {
-        scene = new Scene(grid, 350, 300);
+        double ASPECT_RATIO = (double)4/3;
+        double WINDOW_MAX_HEIGHT = 720;
+        double WINDOW_MAX_WIDTH = WINDOW_MAX_HEIGHT * ASPECT_RATIO;
+
+        scene = new Scene(grid, 800, 600);
 
         primaryStage.setTitle("Rocksmith Challenger");
         primaryStage.setScene(scene);
+        primaryStage.setMaxWidth(WINDOW_MAX_WIDTH);
+        primaryStage.setMaxHeight(WINDOW_MAX_HEIGHT);
         primaryStage.show();
 
         return primaryStage;
@@ -83,7 +90,11 @@ public class RocksmithChallenger extends Application {
     private void applyCSS() {
         scene.getStylesheets().add("style.css");
         grid.getStyleClass().add("grid");
+
+        scoreBar.getStyleClass().add("scoreBar");
+        scoreField.getStyleClass().add("scoreField");
         scorePercentField.getStyleClass().add("scorePercentField");
+
     }
 
     @Override
