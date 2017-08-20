@@ -25,9 +25,11 @@ public class Score {
 
         scoreField.setEditable(false);
         scoreField.setAlignment(Pos.CENTER);
+        scoreField.setFocusTraversable(false);
 
         scorePercentField.setAlignment(Pos.CENTER);
         scorePercentField.setEditable(false);
+        scorePercentField.setFocusTraversable(false);
         scorePercentField.setFont(new Font(20));
 
         readjustIndicators();

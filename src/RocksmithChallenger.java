@@ -6,44 +6,57 @@ import javafx.stage.Stage;
  * Created by mateusz on 16.08.17.
  */
 public class RocksmithChallenger extends Application {
+    private Stage stage;
     private Score score;
-    private ScoreChaser scoreChaser;
-    private Options options;
 
-    private void buildApplication(Stage primaryStage) {
+    private ScoreChaser scoreChaser;
+    private Menu menu;
+
+    private Scene currentScene;
+
+    private void buildApplication(Stage stage) {
         createAppComponents();
-        setUpStage(primaryStage, scoreChaser.getScene()); //temp instead of Menu's scene
+        currentScene = scoreChaser.getScene();
+        currentScene = menu.getScene();
+        setUpStage(currentScene);
     }
 
     private void createAppComponents() {
         score = new Score(250_000);
-        scoreChaser = new ScoreChaser(score);
-
-        //TODO
-        //options = new Options(score, ...???);
-        //menu = new Menu(???);
+        scoreChaser = new ScoreChaser(this, score);
+        menu = new Menu(this);
     }
 
-    private Stage setUpStage(Stage primaryStage, Scene scene) {
+    protected Stage setUpStage(Scene scene) {
         double ASPECT_RATIO = (double)4/3;
         double WINDOW_MAX_HEIGHT = 720;
         double WINDOW_MAX_WIDTH = WINDOW_MAX_HEIGHT * ASPECT_RATIO;
 
-        primaryStage.setTitle("Rocksmith Challenger");
-        primaryStage.setScene(scene);
-        primaryStage.setMaxWidth(WINDOW_MAX_WIDTH);
-        primaryStage.setMaxHeight(WINDOW_MAX_HEIGHT);
-        primaryStage.show();
+        stage.setTitle("Rocksmith Challenger");
+        stage.setScene(currentScene);
+        stage.setMaxWidth(WINDOW_MAX_WIDTH);
+        stage.setMaxHeight(WINDOW_MAX_HEIGHT);
+        stage.show();
 
-        return primaryStage;
+        return stage;
     }
 
     @Override
     public void start(Stage primaryStage) {
-        buildApplication(primaryStage);
+        stage = primaryStage;
+        buildApplication(stage);
     }
 
-    public Score getScore() {
-        return score;
+    public void setCurrentSceneToScoreChasers() {
+        // TODO (improve)
+       currentScene = scoreChaser.getScene();
+       stage.setScene(currentScene);
+    }
+
+    //TODO improve
+
+    public void setCurrentSceneToMenus() {
+        currentScene = menu.getScene();
+        stage.setScene(currentScene);
     }
 }
