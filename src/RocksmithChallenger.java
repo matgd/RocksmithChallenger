@@ -14,6 +14,7 @@ public class RocksmithChallenger extends Application {
     private Options options;
 
     private Scene currentScene;
+    private SceneProvider currentSceneProvider;
 
     private void buildApplication(Stage stage) {
         createAppComponents();
@@ -29,7 +30,7 @@ public class RocksmithChallenger extends Application {
         options = new Options(this, score);
     }
 
-    protected Stage setUpStage(Scene scene) {
+    private Stage setUpStage(Scene scene) {
         double ASPECT_RATIO = (double)4/3;
         double WINDOW_MAX_HEIGHT = 720;
         double WINDOW_MAX_WIDTH = WINDOW_MAX_HEIGHT * ASPECT_RATIO;
@@ -42,6 +43,7 @@ public class RocksmithChallenger extends Application {
 
         return stage;
     }
+
 
     @Override
     public void start(Stage primaryStage) {

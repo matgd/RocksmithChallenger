@@ -87,4 +87,8 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
     public Scene getScene() {
         return buildScene();
     }
+
+    public GridPane getGridPane() {
+        return grid;
+    }
 }

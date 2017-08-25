@@ -68,7 +68,10 @@ public class Score {
         return scoreLimit;
     }
 
-    public void setScoreLimit(double scoreLimit) {
+    public void setScoreLimit(double scoreLimit) throws ScoreLesserThanOneException {
+        if(scoreLimit < 1) {
+            throw new ScoreLesserThanOneException();
+        }
         this.scoreLimit = scoreLimit;
         readjustIndicators();
     }
@@ -91,5 +94,13 @@ public class Score {
         scoreBar.setProgress(currentScore/scoreLimit);
         progressPercent = (currentScore/scoreLimit)*100;
         scorePercentField.setText(String.format("%.1f%%", progressPercent));
+    }
+
+    public Double stringWithSpacesToDoubleParser(String stringWithSpaces) {
+        String input = stringWithSpaces;
+        String[] inputPartsWithoutSpaces = input.split(" ");
+        String stringWithoutSpaces = String.join("", inputPartsWithoutSpaces);
+        Double stringWithoutSpacesToDouble = Double.parseDouble(stringWithoutSpaces);
+        return stringWithoutSpacesToDouble;
     }
 }
