@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by mateusz on 20.08.17.
  */
-public class Menu extends RocksmithChallenger {
+public class Menu extends RocksmithChallenger implements SceneProvider {
     private RocksmithChallenger rocksmithChallenger;
     private GridPane grid;
     private Scene scene;
@@ -55,14 +55,16 @@ public class Menu extends RocksmithChallenger {
         goToScoreChaserButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                rocksmithChallenger.setCurrentSceneToScoreChasers();
+                ScoreChaser scoreChaser = rocksmithChallenger.getScoreChaser();
+                rocksmithChallenger.changeCurrentScene(scoreChaser);
             }
         });
 
         goToOptionsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                Options options = rocksmithChallenger.getOptions();
+                rocksmithChallenger.changeCurrentScene(options);
             }
         });
     }

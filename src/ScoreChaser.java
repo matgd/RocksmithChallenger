@@ -13,7 +13,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by mateusz on 17.08.17.
  */
-public class ScoreChaser extends RocksmithChallenger {
+public class ScoreChaser extends RocksmithChallenger implements SceneProvider {
     private RocksmithChallenger rocksmithChallenger;
     private GridPane grid;
     private Scene scene;
@@ -66,31 +66,6 @@ public class ScoreChaser extends RocksmithChallenger {
         menuButton = new Button("Menu");
     }
 
-    private void addEventHandlers() {
-        challengeButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                score.addToCurrentScore(45_000*(Math.random()));
-            }
-        });
-
-        menuButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                rocksmithChallenger.setCurrentSceneToMenus();
-            }
-        });
-
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if(event.getCode() == KeyCode.ESCAPE) {
-                    rocksmithChallenger.setCurrentSceneToMenus();
-                }
-            }
-        });
-    }
-
     private void applyPropertiesToComponents() {
         double PREF_WIDTH = 600;
         scoreBar.setPrefWidth(PREF_WIDTH);
@@ -99,6 +74,7 @@ public class ScoreChaser extends RocksmithChallenger {
         challengeButton.setPrefWidth(PREF_WIDTH);
         menuButton.setPrefWidth(PREF_WIDTH/2);
     }
+
 
     private void createSceneWithGridPane() {
         scene = new Scene(grid, 800, 600);
@@ -111,6 +87,34 @@ public class ScoreChaser extends RocksmithChallenger {
         scoreBar.getStyleClass().add("scoreBar");
         scoreField.getStyleClass().add("scoreField");
         scorePercentField.getStyleClass().add("scorePercentField");
+    }
+
+
+    private void addEventHandlers() {
+        challengeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                score.addToCurrentScore(45_000*(Math.random()));
+            }
+        });
+
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Menu menu = rocksmithChallenger.getMenu();
+                rocksmithChallenger.changeCurrentScene(menu);
+            }
+        });
+
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode() == KeyCode.ESCAPE) {
+                    Menu menu = rocksmithChallenger.getMenu();
+                    rocksmithChallenger.changeCurrentScene(menu);
+                }
+            }
+        });
     }
 
     public Scene getScene() {
