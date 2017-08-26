@@ -24,3 +24,9 @@
     -fx-effect: dropshadow(gaussian, white, 15, 0.3, 0, 0);
     /* http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#typeeffect */
 }
+
+.scoreLabel {
+    -fx-opacity: 1.0;
+    -fx-font-family: monospace;
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+}

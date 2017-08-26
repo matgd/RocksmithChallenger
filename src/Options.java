@@ -4,8 +4,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -20,9 +20,10 @@ public class Options extends RocksmithChallenger implements SceneProvider {
     private Scene scene;
 
     private Score score;
-    private TextField currentScoreLimitTextField;
+    private Label scoreLabel;
     private TextField usersScoreLimitInput;
     private Button changeScoreLimitButton;
+    private Button resetScoreButton;
     private Button menuButton;
 
     public Options(RocksmithChallenger rocksmithChallenger, Score score) {
@@ -49,33 +50,37 @@ public class Options extends RocksmithChallenger implements SceneProvider {
         createComponents();
         applyPropertiesToComponents();
 
-        grid.add(currentScoreLimitTextField, 0, 0);
+        grid.add(scoreLabel, 0, 0);
         grid.add(usersScoreLimitInput, 0, 1);
         grid.add(changeScoreLimitButton, 0 , 2);
-        grid.add(menuButton, 0, 3);
+        grid.add(resetScoreButton, 0, 3);
+        grid.add(menuButton, 0, 4);
 
         return grid;
     }
 
     private void createComponents() {
-        currentScoreLimitTextField = new TextField(String.format("Current score limit: %,.0f", score.getScoreLimit()));
+        scoreLabel = new Label();
         usersScoreLimitInput = new TextField("Write new score limit here.");
-        changeScoreLimitButton = new Button("Change score limit.");
+        changeScoreLimitButton = new Button("Change score limit");
+        resetScoreButton = new Button("Reset score");
         menuButton = new Button("Menu");
     }
 
     private void applyPropertiesToComponents() {
-        currentScoreLimitTextField.setEditable(false);
-        currentScoreLimitTextField.setAlignment(Pos.CENTER);
-        currentScoreLimitTextField.setFocusTraversable(false);
-        currentScoreLimitTextField.setDisable(true);
+
+        scoreLabel.setDisable(true);
+        scoreLabel.setMouseTransparent(true);
 
         usersScoreLimitInput.setEditable(true);
 
+        readjustIndicators();
+
         double PREF_WIDTH = 600;
-        currentScoreLimitTextField.setPrefWidth(PREF_WIDTH);
+        scoreLabel.setPrefWidth(PREF_WIDTH);
         usersScoreLimitInput.setPrefWidth(PREF_WIDTH);
         changeScoreLimitButton.setPrefWidth(PREF_WIDTH);
+        resetScoreButton.setPrefWidth(PREF_WIDTH/2);
         menuButton.setPrefWidth(PREF_WIDTH/2);
     }
 
@@ -87,7 +92,7 @@ public class Options extends RocksmithChallenger implements SceneProvider {
         scene.getStylesheets().add("style.css");
         grid.getStyleClass().add("grid");
 
-
+        scoreLabel.getStyleClass().add("scoreLabel");
     }
 
     private void addEventHandlers() {
@@ -117,6 +122,14 @@ public class Options extends RocksmithChallenger implements SceneProvider {
             }
         });
 
+        resetScoreButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                score.setCurrentScore(0);
+                readjustIndicators();
+            }
+        });
+
         menuButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -137,7 +150,8 @@ public class Options extends RocksmithChallenger implements SceneProvider {
     }
 
     private void readjustIndicators() {
-        currentScoreLimitTextField.setText(String.format("Current score limit: %,.0f", score.getScoreLimit()));
+        scoreLabel.setText(String.format(" Current score: %,.0f / %,.0f",
+                                                score.getCurrentScore(), score.getScoreLimit()));
     }
 
     public Scene getScene() {

@@ -67,6 +67,9 @@ public class ScoreChaser extends RocksmithChallenger implements SceneProvider {
     }
 
     private void applyPropertiesToComponents() {
+        scoreField.setMouseTransparent(true);
+        scorePercentField.setMouseTransparent(true);
+
         double PREF_WIDTH = 600;
         scoreBar.setPrefWidth(PREF_WIDTH);
         scoreField.setPrefWidth(PREF_WIDTH);

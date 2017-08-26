@@ -12,6 +12,10 @@ public class RocksmithChallenger extends Application {
     private ScoreChaser scoreChaser;
     private Menu menu;
     private Options options;
+    //TODO
+    // challenges
+    // stats
+    // about me
 
     private Scene currentScene;
     private SceneProvider currentSceneProvider;
@@ -66,9 +70,5 @@ public class RocksmithChallenger extends Application {
 
     public Options getOptions() {
         return options;
-    }
-
-    public Scene getCurrentScene() {
-        return currentScene;
     }
 }
