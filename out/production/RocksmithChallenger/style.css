@@ -20,7 +20,6 @@
     -fx-font-size: 40px;
     -fx-font-weight: bolder;
     -fx-font-family: "Verdana";
-
     -fx-effect: dropshadow(gaussian, white, 15, 0.3, 0, 0);
     /* http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#typeeffect */
 }

@@ -16,6 +16,7 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
 
     private Button goToScoreChaserButton;
     private Button goToOptionsButton;
+    private Button goToBasicSceneButton;
 
     public Menu(RocksmithChallenger rocksmithChallenger) {
         this.rocksmithChallenger = rocksmithChallenger;
@@ -40,7 +41,8 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
         applyPropertiesToComponents();
 
         grid.add(goToScoreChaserButton, 0 ,0);
-        grid.add(goToOptionsButton, 0,  1);;
+        grid.add(goToOptionsButton, 0,  1);
+        grid.add(goToBasicSceneButton, 0, 2);
 
         return grid;
     }
@@ -48,6 +50,7 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
     private void createComponents() {
         goToScoreChaserButton = new Button("Score Chaser");
         goToOptionsButton = new Button("Options");
+        goToBasicSceneButton = new Button("Basic Scene");
         addEventHandlers();
     }
 
@@ -57,6 +60,7 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
             public void handle(ActionEvent event) {
                 ScoreChaser scoreChaser = rocksmithChallenger.getScoreChaser();
                 rocksmithChallenger.changeCurrentScene(scoreChaser);
+
             }
         });
 
@@ -65,6 +69,14 @@ public class Menu extends RocksmithChallenger implements SceneProvider {
             public void handle(ActionEvent event) {
                 Options options = rocksmithChallenger.getOptions();
                 rocksmithChallenger.changeCurrentScene(options);
+            }
+        });
+
+        goToBasicSceneButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                BasicScene basicScene = rocksmithChallenger.getBasicScene();
+                rocksmithChallenger.changeCurrentScene(basicScene);
             }
         });
     }
