@@ -13,10 +13,10 @@ public class RocksmithChallenger extends Application {
     private Menu menu;
     private Options options;
     private BasicScene basicScene;
+    private AboutMe aboutMeScene;
     //TODO
     // challenges
     // stats
-    // about me
 
     private Scene currentScene;
     private SceneProvider currentSceneProvider;
@@ -33,7 +33,8 @@ public class RocksmithChallenger extends Application {
         scoreChaser = new ScoreChaser(this, score);
         menu = new Menu(this);
         options = new Options(this, score);
-        basicScene = new BasicScene();
+        basicScene = new BasicScene(this);
+        aboutMeScene = new AboutMe(this);
     }
 
     private Stage setUpStage(Scene scene) {
@@ -76,5 +77,9 @@ public class RocksmithChallenger extends Application {
 
     public BasicScene getBasicScene() {
         return basicScene;
+    }
+
+    public AboutMe getAboutMeScene() {
+        return aboutMeScene;
     }
 }

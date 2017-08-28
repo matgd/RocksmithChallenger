@@ -1,3 +1,6 @@
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +13,7 @@ import javafx.scene.layout.GridPane;
  * Created by Mateusz on 2017-08-27.
  */
 public class BasicScene implements SceneProvider {
+    private RocksmithChallenger rocksmithChallenger;
     private GridPane grid;
     private BorderPane borderPane;
 
@@ -21,14 +25,26 @@ public class BasicScene implements SceneProvider {
     private MenuItem scoreChaserMenuItem;
     private MenuItem placeholderMenuItem;  //PLACEHOLDER
 
-    private Menu optionsMenu;
+    private javafx.scene.control.Menu optionsMenu;
 
+    private javafx.scene.control.Menu helpMenu;
+    private MenuItem aboutMeMenuItem;
+
+    public BasicScene(RocksmithChallenger rocksmithChallenger) {
+        this.rocksmithChallenger = rocksmithChallenger;
+    }
 
     private Scene buildScene() {
+        structBorderPane();
         structGridPane();
         createSceneWithGridPaneInsideBorderPane();
         applyCSS();
         return scene;
+    }
+
+    private BorderPane structBorderPane() {
+        borderPane = new BorderPane();
+        return borderPane;
     }
 
     private GridPane structGridPane() {
@@ -45,6 +61,7 @@ public class BasicScene implements SceneProvider {
     }
 
     private void createComponents() {
+
         menuBar = new MenuBar();
 
         menuMenu = new Menu("Menu");
@@ -53,22 +70,38 @@ public class BasicScene implements SceneProvider {
 
         optionsMenu = new Menu("Options");
 
+        helpMenu = new Menu("Help");
+        aboutMeMenuItem = new MenuItem("About me");
     }
 
     private void applyPropertiesToComponents() {
-        borderPane = new BorderPane();
-        borderPane.setCenter(grid);
+        setGridPaneInsideBorderPane(grid);
         borderPane.setTop(menuBar);
 
-
-
         menuBar.getMenus().add(menuMenu);
-
         menuMenu.getItems().add(scoreChaserMenuItem);
         menuMenu.getItems().add(placeholderMenuItem);
 
         menuBar.getMenus().add(optionsMenu);
 
+        menuBar.getMenus().add(helpMenu);
+        helpMenu.getItems().add(aboutMeMenuItem);
+
+        addEventHandlers();
+    }
+
+    private void addEventHandlers() {
+        aboutMeMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AboutMe aboutMe = rocksmithChallenger.getAboutMeScene();
+                rocksmithChallenger.changeCurrentScene(aboutMe);
+            }
+        });
+    }
+
+    protected void setGridPaneInsideBorderPane(GridPane grid) {
+        borderPane.setCenter(grid);
     }
 
     private void createSceneWithGridPaneInsideBorderPane() {
