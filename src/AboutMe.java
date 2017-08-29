@@ -37,7 +37,6 @@ public class AboutMe extends BasicScene {
     }
 
     private void applyPropertiesToComponents() {
-        myGithubLabel.getStyleClass().add("-fx-font-family: monospace");
     }
 
     private void addObjectsToGridPane() {

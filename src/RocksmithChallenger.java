@@ -10,7 +10,6 @@ public class RocksmithChallenger extends Application {
     private Score score;
 
     private ScoreChaser scoreChaser;
-    private Menu menu;
     private Options options;
     private BasicScene basicScene;
     private AboutMe aboutMeScene;
@@ -24,14 +23,12 @@ public class RocksmithChallenger extends Application {
     private void buildApplication(Stage stage) {
         createAppComponents();
         currentScene = scoreChaser.getScene();
-        currentScene = menu.getScene();
         setUpStage(currentScene);
     }
 
     private void createAppComponents() {
         score = new Score(250_000);
         scoreChaser = new ScoreChaser(this, score);
-        menu = new Menu(this);
         options = new Options(this, score);
         basicScene = new BasicScene(this);
         aboutMeScene = new AboutMe(this);
@@ -65,10 +62,6 @@ public class RocksmithChallenger extends Application {
 
     public ScoreChaser getScoreChaser() {
         return scoreChaser;
-    }
-
-    public Menu getMenu() {
-        return menu;
     }
 
     public Options getOptions() {

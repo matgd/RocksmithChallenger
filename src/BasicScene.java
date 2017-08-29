@@ -1,11 +1,9 @@
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -19,15 +17,18 @@ public class BasicScene implements SceneProvider {
 
     private Scene scene;
 
+
     private MenuBar menuBar;
 
-    private javafx.scene.control.Menu menuMenu;
+    private Menu menuMenu;
     private MenuItem scoreChaserMenuItem;
     private MenuItem placeholderMenuItem;  //PLACEHOLDER
 
-    private javafx.scene.control.Menu optionsMenu;
+    private Menu optionsMenu;
+    private MenuItem customizeScoreMenuItem;
 
-    private javafx.scene.control.Menu helpMenu;
+    private Menu helpMenu;
+    private MenuItem howThisProgramWorksMenuItem;
     private MenuItem aboutMeMenuItem;
 
     public BasicScene(RocksmithChallenger rocksmithChallenger) {
@@ -69,8 +70,10 @@ public class BasicScene implements SceneProvider {
         placeholderMenuItem = new MenuItem("PLACEHOLDER");
 
         optionsMenu = new Menu("Options");
+        customizeScoreMenuItem = new MenuItem("Customize score");
 
         helpMenu = new Menu("Help");
+        howThisProgramWorksMenuItem = new MenuItem("How this program works");
         aboutMeMenuItem = new MenuItem("About me");
     }
 
@@ -83,20 +86,30 @@ public class BasicScene implements SceneProvider {
         menuMenu.getItems().add(placeholderMenuItem);
 
         menuBar.getMenus().add(optionsMenu);
+        optionsMenu.getItems().add(customizeScoreMenuItem);
 
         menuBar.getMenus().add(helpMenu);
+        helpMenu.getItems().add(howThisProgramWorksMenuItem);
         helpMenu.getItems().add(aboutMeMenuItem);
 
         addEventHandlers();
     }
 
     private void addEventHandlers() {
-        aboutMeMenuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                AboutMe aboutMe = rocksmithChallenger.getAboutMeScene();
-                rocksmithChallenger.changeCurrentScene(aboutMe);
-            }
+        scoreChaserMenuItem.setOnAction(event -> {
+            ScoreChaser scoreChaser = rocksmithChallenger.getScoreChaser();
+            rocksmithChallenger.changeCurrentScene(scoreChaser);
+        });
+
+        aboutMeMenuItem.setOnAction(event -> {
+            AboutMe aboutMe = rocksmithChallenger.getAboutMeScene();
+            rocksmithChallenger.changeCurrentScene(aboutMe);
+        });
+
+
+        customizeScoreMenuItem.setOnAction(event -> {
+            Options options = rocksmithChallenger.getOptions();
+            rocksmithChallenger.changeCurrentScene(options);
         });
     }
 
@@ -113,12 +126,9 @@ public class BasicScene implements SceneProvider {
         grid.getStyleClass().add("grid");
     }
 
-    public GridPane getGridPane() {
-        return grid;
-    }
-
     @Override
     public Scene getScene() {
         return buildScene();
     }
+
 }
