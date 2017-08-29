@@ -77,6 +77,7 @@ public class Options extends BasicScene implements SceneProvider {
         grid.getStyleClass().add("grid");
 
         scoreLabel.getStyleClass().add("scoreLabel");
+        usersScoreLimitInput.getStyleClass().add("usersScoreLimitInput");
     }
 
     private void addEventHandlers() {

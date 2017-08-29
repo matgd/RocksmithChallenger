@@ -39,6 +39,9 @@ public class RocksmithChallenger extends Application {
         double WINDOW_MAX_HEIGHT = 720;
         double WINDOW_MAX_WIDTH = WINDOW_MAX_HEIGHT * ASPECT_RATIO;
 
+        // TODO
+        // Switching between scenes changes window resolution back to 800x600
+
         stage.setTitle("Rocksmith Challenger");
         stage.setScene(currentScene);
         stage.setMaxWidth(WINDOW_MAX_WIDTH);
