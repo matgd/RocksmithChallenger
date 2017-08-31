@@ -16,6 +16,7 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
     private ProgressBar scoreBar;
     private TextField scoreField;
     private TextField scorePercentField;
+    private TextField scoreInputField;
     private Button challengeButton;
 
     public ScoreChaser(RocksmithChallenger rocksmithChallenger, Score score) {
@@ -43,6 +44,7 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
         scoreBar = score.getScoreBar();
         scoreField = score.getScoreField();
         scorePercentField = score.getScorePercentField();
+        scoreInputField = new TextField();
         challengeButton = new Button("Add score!");
     }
 
@@ -54,6 +56,7 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
         scoreBar.setPrefWidth(PREF_WIDTH);
         scoreField.setPrefWidth(PREF_WIDTH);
         scorePercentField.setPrefWidth(PREF_WIDTH);
+        scoreInputField.setPrefWidth(PREF_WIDTH);
         challengeButton.setPrefWidth(PREF_WIDTH);
     }
 
@@ -61,7 +64,8 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
         grid.add(scoreBar, 0 ,0);
         grid.add(scoreField, 0,  1);
         grid.add(scorePercentField, 0 , 2);
-        grid.add(challengeButton, 0 ,3);
+        grid.add(scoreInputField, 0, 3);
+        grid.add(challengeButton, 0 ,4);
     }
 
     private void applyCSS() {
@@ -74,7 +78,26 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
 
 
     private void addEventHandlers() {
-        challengeButton.setOnAction(event -> score.addToCurrentScore(45_000*(Math.random())));
+        scoreInputField.setOnMouseClicked(event -> {
+            scoreInputField.setText("");
+            scoreInputField.setStyle("-fx-font-fill: black;");
+        });
+
+        challengeButton.setOnAction(event -> {
+            try {
+                String scoreInputString = scoreInputField.getText();
+                Double scoreInputDouble = score.stringWithSpacesToDoubleParser(scoreInputString);
+                if(scoreInputDouble + score.getCurrentScore() < 0) {
+                    throw new ScoreLesserThanZeroException();
+                }
+                score.addToCurrentScore(scoreInputDouble);
+            } catch (NumberFormatException e) {
+                scoreInputField.setText("You should enter a number.");
+                scoreInputField.setStyle("-fx-font-fill: red;");
+            } catch (ScoreLesserThanZeroException e) {
+                score.setCurrentScore(0);
+            }
+        });
     }
 
     @Override
