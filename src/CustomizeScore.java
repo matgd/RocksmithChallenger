@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by mateusz on 17.08.17.
  */
-public class Options extends BasicScene implements SceneProvider {
+public class CustomizeScore extends BasicScene {
     private GridPane grid;
 
     private Score score;
@@ -23,7 +23,7 @@ public class Options extends BasicScene implements SceneProvider {
     private Button changeScoreLimitButton;
     private Button resetScoreButton;
 
-    public Options(RocksmithChallenger rocksmithChallenger, Score score) {
+    public CustomizeScore(RocksmithChallenger rocksmithChallenger, Score score) {
         super(rocksmithChallenger);
         this.score = score;
     }
@@ -76,8 +76,8 @@ public class Options extends BasicScene implements SceneProvider {
     private void applyCSS() {
         grid.getStyleClass().add("grid");
 
-        scoreLabel.getStyleClass().add("scoreLabel");
-        usersScoreLimitInput.getStyleClass().add("usersScoreLimitInput");
+        scoreLabel.getStyleClass().add("CustomizeScore_scoreLabel");
+        usersScoreLimitInput.getStyleClass().add("CustomizeScore_usersScoreLimitInput");
     }
 
     private void addEventHandlers() {

@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 /**
  * Created by mateusz on 17.08.17.
  */
-public class ScoreChaser extends BasicScene implements SceneProvider {
+public class ScoreChaser extends BasicScene {
     private GridPane grid;
 
     private Score score;
@@ -71,9 +71,10 @@ public class ScoreChaser extends BasicScene implements SceneProvider {
     private void applyCSS() {
         grid.getStyleClass().add("grid");
 
-        scoreBar.getStyleClass().add("scoreBar");
-        scoreField.getStyleClass().add("scoreField");
-        scorePercentField.getStyleClass().add("scorePercentField");
+        scoreBar.getStyleClass().add("ScoreChaser_scoreBar");
+        scoreField.getStyleClass().add("ScoreChaser_scoreField");
+        scorePercentField.getStyleClass().add("ScoreChaser_scorePercentField");
+        scoreInputField.getStyleClass().add("ScoreChaser_scoreInputField");
     }
 
 

@@ -7,15 +7,15 @@
     -fx-font-family: "Liberation Sans";
 }
 
-.scoreBar {
+.ScoreChaser_scoreBar {
     -fx-accent: green;
 }
 
-.scoreField {
+.ScoreChaser_scoreField {
     -fx-background-color: rgba(255, 255, 255, 0.2);
 }
 
-.scorePercentField {
+.ScoreChaser_scorePercentField {
     -fx-background-color: rgba(255, 255, 255, 0);
     -fx-font-size: 40px;
     -fx-font-weight: bolder;
@@ -24,13 +24,18 @@
     /* http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#typeeffect */
 }
 
+.ScoreChaser_scoreInputField {
+    -fx-alignment: center;
+}
 
-.scoreLabel {
+
+
+.CustomizeScore_scoreLabel {
     -fx-alignment: center;
     -fx-opacity: 1.0;
     -fx-background-color: rgba(255, 255, 255, 0.3);
 }
 
-.usersScoreLimitInput {
+.CustomizeScore_usersScoreLimitInput {
     -fx-alignment: center;
 }

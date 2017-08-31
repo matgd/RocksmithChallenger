@@ -67,8 +67,8 @@ public class TopMenuBar {
 
 
         customizeScoreMenuItem.setOnAction(event -> {
-            Options options = rocksmithChallenger.getOptions();
-            rocksmithChallenger.changeCurrentScene(options);
+            CustomizeScore customizeScore = rocksmithChallenger.getCustomizeScore();
+            rocksmithChallenger.changeCurrentScene(customizeScore);
         });
     }
 

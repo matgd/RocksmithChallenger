@@ -10,7 +10,7 @@ public class RocksmithChallenger extends Application {
     private Score score;
 
     private ScoreChaser scoreChaser;
-    private Options options;
+    private CustomizeScore customizeScore;
     private BasicScene basicScene;
     private AboutMe aboutMeScene;
     //TODO
@@ -29,7 +29,7 @@ public class RocksmithChallenger extends Application {
     private void createAppComponents() {
         score = new Score(250_000);
         scoreChaser = new ScoreChaser(this, score);
-        options = new Options(this, score);
+        customizeScore = new CustomizeScore(this, score);
         basicScene = new BasicScene(this);
         aboutMeScene = new AboutMe(this);
     }
@@ -67,8 +67,8 @@ public class RocksmithChallenger extends Application {
         return scoreChaser;
     }
 
-    public Options getOptions() {
-        return options;
+    public CustomizeScore getCustomizeScore() {
+        return customizeScore;
     }
 
     public BasicScene getBasicScene() {
