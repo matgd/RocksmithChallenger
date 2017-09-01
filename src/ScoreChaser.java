@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
 
 /**
  * Created by mateusz on 17.08.17.
