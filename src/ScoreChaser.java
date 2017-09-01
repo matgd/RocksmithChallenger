@@ -1,9 +1,8 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -17,7 +16,15 @@ public class ScoreChaser extends BasicScene {
     private TextField scoreField;
     private TextField scorePercentField;
     private TextField scoreInputField;
-    private Button challengeButton;
+
+    private FlowPane radioButtonFlowPane;
+    private int inputMultiplier = 1;
+    private ToggleGroup inputMultipliersGroup;
+    private RadioButton multiplyInputByOneRadioButton;
+    private RadioButton multiplyInputByThousandRadioButton;
+    private RadioButton multiplyInputByHundredThousandRadioButton;
+
+    private Button addScoreButton;
 
     public ScoreChaser(RocksmithChallenger rocksmithChallenger, Score score) {
         super(rocksmithChallenger);
@@ -45,19 +52,35 @@ public class ScoreChaser extends BasicScene {
         scoreField = score.getScoreField();
         scorePercentField = score.getScorePercentField();
         scoreInputField = new TextField();
-        challengeButton = new Button("Add score!");
+
+        radioButtonFlowPane = new FlowPane();
+        inputMultipliersGroup = new ToggleGroup();
+        multiplyInputByOneRadioButton = new RadioButton("x 1        ");
+        multiplyInputByThousandRadioButton = new RadioButton("x 1 000       ");
+        multiplyInputByHundredThousandRadioButton = new RadioButton("x 100 000");
+
+        addScoreButton = new Button("Add score!");
     }
 
     private void applyPropertiesToComponents() {
         scoreField.setMouseTransparent(true);
         scorePercentField.setMouseTransparent(true);
 
+        multiplyInputByOneRadioButton.setToggleGroup(inputMultipliersGroup);
+        multiplyInputByThousandRadioButton.setToggleGroup(inputMultipliersGroup);
+        multiplyInputByHundredThousandRadioButton.setToggleGroup(inputMultipliersGroup);
+        multiplyInputByOneRadioButton.setSelected(true);
+        radioButtonFlowPane.setAlignment(Pos.CENTER);
+        radioButtonFlowPane.getChildren().add(multiplyInputByOneRadioButton);
+        radioButtonFlowPane.getChildren().add(multiplyInputByThousandRadioButton);
+        radioButtonFlowPane.getChildren().add(multiplyInputByHundredThousandRadioButton);
+
         double PREF_WIDTH = 600;
         scoreBar.setPrefWidth(PREF_WIDTH);
         scoreField.setPrefWidth(PREF_WIDTH);
         scorePercentField.setPrefWidth(PREF_WIDTH);
         scoreInputField.setPrefWidth(PREF_WIDTH);
-        challengeButton.setPrefWidth(PREF_WIDTH);
+        addScoreButton.setPrefWidth(PREF_WIDTH);
     }
 
     private void addObjectsToGridPane() {
@@ -65,7 +88,8 @@ public class ScoreChaser extends BasicScene {
         grid.add(scoreField, 0,  1);
         grid.add(scorePercentField, 0 , 2);
         grid.add(scoreInputField, 0, 3);
-        grid.add(challengeButton, 0 ,4);
+        grid.add(radioButtonFlowPane, 0, 4);
+        grid.add(addScoreButton, 0 ,5);
     }
 
     private void applyCSS() {
@@ -75,23 +99,38 @@ public class ScoreChaser extends BasicScene {
         scoreField.getStyleClass().add("ScoreChaser_scoreField");
         scorePercentField.getStyleClass().add("ScoreChaser_scorePercentField");
         scoreInputField.getStyleClass().add("ScoreChaser_scoreInputField");
+        multiplyInputByOneRadioButton.getStyleClass().add("ScoreChaser_RadioButton");
+        multiplyInputByThousandRadioButton.getStyleClass().add("ScoreChaser_RadioButton");
+        multiplyInputByHundredThousandRadioButton.getStyleClass().add("ScoreChaser_RadioButton");
     }
 
 
     private void addEventHandlers() {
+        multiplyInputByOneRadioButton.setOnAction(event -> {
+            inputMultiplier = 1;
+        });
+
+        multiplyInputByThousandRadioButton.setOnAction(event -> {
+            inputMultiplier = 1_000;
+        });
+
+        multiplyInputByHundredThousandRadioButton.setOnAction(event -> {
+            inputMultiplier = 100_000;
+        });
+
         scoreInputField.setOnMouseClicked(event -> {
             scoreInputField.setText("");
             scoreInputField.setStyle("-fx-font-fill: black;");
         });
 
-        challengeButton.setOnAction(event -> {
+        addScoreButton.setOnAction(event -> {
             try {
                 String scoreInputString = scoreInputField.getText();
                 Double scoreInputDouble = score.stringWithSpacesToDoubleParser(scoreInputString);
                 if(scoreInputDouble + score.getCurrentScore() < 0) {
                     throw new ScoreLesserThanZeroException();
                 }
-                score.addToCurrentScore(scoreInputDouble);
+                score.addToCurrentScore(scoreInputDouble * inputMultiplier);
             } catch (NumberFormatException e) {
                 scoreInputField.setText("You should enter a number.");
                 scoreInputField.setStyle("-fx-font-fill: red;");

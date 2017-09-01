@@ -28,14 +28,21 @@
     -fx-alignment: center;
 }
 
+.ScoreChaser_RadioButton {
+    -fx-font-family: sans-serif;
+    -fx-font-size: 16px;
+}
 
 
-.scoreLabel {
+
+.CustomizeScore_scoreLabel {
     -fx-alignment: center;
     -fx-opacity: 1.0;
     -fx-background-color: rgba(255, 255, 255, 0.3);
 }
 
-.usersScoreLimitInput {
+.CustomizeScore_usersScoreLimitInput {
     -fx-alignment: center;
+    -fx-highlight-text-fill: black;
+    -fx-highlight-fill: white;
 }

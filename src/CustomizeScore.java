@@ -63,7 +63,7 @@ public class CustomizeScore extends BasicScene {
         scoreLabel.setPrefWidth(PREF_WIDTH);
         usersScoreLimitInput.setPrefWidth(PREF_WIDTH);
         changeScoreLimitButton.setPrefWidth(PREF_WIDTH);
-        resetScoreButton.setPrefWidth(PREF_WIDTH/2);
+        resetScoreButton.setPrefWidth(PREF_WIDTH);
     }
 
     private void addObjectsToGridPane() {
@@ -109,7 +109,7 @@ public class CustomizeScore extends BasicScene {
     }
 
     private void readjustIndicators() {
-        scoreLabel.setText(String.format(" Current score: %,.0f / %,.0f",
+        scoreLabel.setText(String.format(" %n Current score: %,.0f / %,.0f %n ",
                                                 score.getCurrentScore(), score.getScoreLimit()));
     }
 

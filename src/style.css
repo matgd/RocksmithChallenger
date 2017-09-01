@@ -28,6 +28,11 @@
     -fx-alignment: center;
 }
 
+.ScoreChaser_RadioButton {
+    -fx-font-family: sans-serif;
+    -fx-font-size: 16px;
+}
+
 
 
 .CustomizeScore_scoreLabel {
@@ -38,4 +43,6 @@
 
 .CustomizeScore_usersScoreLimitInput {
     -fx-alignment: center;
+    -fx-highlight-text-fill: black;
+    -fx-highlight-fill: white;
 }
